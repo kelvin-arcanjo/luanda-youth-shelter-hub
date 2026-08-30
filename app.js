@@ -76,3 +76,9 @@ document.getElementById('facilityForm').addEventListener('submit', async (e) => 
     console.error('Error adding facility:', error);
   }
 });
+
+map.on('click' , (e) => {
+    const { lat , lng } = e.latlng
+    document.getElementById('lat').value = lat.toFixed(4)
+    document.getElementById('lng').value = lng.toFixed(4);
+})
