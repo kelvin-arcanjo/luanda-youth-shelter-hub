@@ -5,6 +5,8 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png' , {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map)
 
+let facilitiesData = [];
+const markersGroup = L.layerGroup().addTo(map);
 
 async function fetchFacilities() {
     try {
@@ -12,15 +14,35 @@ async function fetchFacilities() {
         const data = await response.json()
         console.log(data)
 
-        data.forEach(facility => {
-            L.marker([facility.lat, facility.lng])
-            .addTo(map)
-            .bindPopup(`<b>${facility.name}</b><br>${facility.municipality}`);
-        })
+        facilitiesData = data;
 
-    } catch (error) {
+
+        displayFacilities(facilitiesData); 
+      } catch (error) {
         console.log('Error fetching data:' , error)
     }
 }
 
 fetchFacilities();
+
+function displayFacilities(facilities) {
+    markersGroup.clearLayers()
+
+    facilities.forEach(facility => {
+        L.marker([facility.lat, facility.lng])
+        .bindPopup(`<b>${facility.name}</b><br>${facility.municipality}`)
+        .addTo(markersGroup)
+    })
+}
+
+document.getElementById('categoryFilter').addEventListener('change' , (e) => {
+    const selectedCategory = e.target.value
+
+    if (selectedCategory === 'all') {
+        displayFacilities(facilitiesData)
+
+    } else {
+        const filtered = facilitiesData.filter(f => f.category === selectedCategory)
+        displayFacilities(filtered)
+    }
+})
