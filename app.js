@@ -46,3 +46,33 @@ document.getElementById('categoryFilter').addEventListener('change' , (e) => {
         displayFacilities(filtered)
     }
 })
+
+
+document.getElementById('facilityForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const newFacility = {
+    name: document.getElementById('name').value,
+    category: document.getElementById('category').value,
+    municipality: document.getElementById('municipality').value,
+    lat: parseFloat(document.getElementById('lat').value),
+    lng: parseFloat(document.getElementById('lng').value)
+  };
+
+  try {
+    const response = await fetch('/api/facilities', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newFacility)
+    });
+
+    if (response.ok) {
+      const addedFacility = await response.json();
+      facilitiesData.push(addedFacility);
+      displayFacilities(facilitiesData);
+      e.target.reset();
+    }
+  } catch (error) {
+    console.error('Error adding facility:', error);
+  }
+});

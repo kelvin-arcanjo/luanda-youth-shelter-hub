@@ -2,6 +2,7 @@ const express = require('express')
 const app = express() 
 const PORT = 3000
 
+app.use(express.json());
 app.use(express.static('.'))
 
 const facilities = [
@@ -36,6 +37,15 @@ const facilities = [
 app.get('/api/facilities' , (req , res) => {
     res.json(facilities)
 })
+
+app.post('/api/facilities', (req, res) => {
+  const newFacility = {
+    id: facilities.length + 1,
+    ...req.body
+  };
+  facilities.push(newFacility);
+  res.status(201).json(newFacility);
+});
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`)
