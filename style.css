@@ -104,3 +104,27 @@ h1 {
 #facilityForm button:hover {
   background-color: #219150;
 }
+
+.custom-marker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.marker-shelter {
+  background-color: #2980b9; /* Blue for Shelter */
+}
+
+.marker-food_aid {
+  background-color: #27ae60; /* Green for Food Aid */
+}
+
+.marker-default {
+  background-color: #e67e22; /* Orange for general/other */
+}

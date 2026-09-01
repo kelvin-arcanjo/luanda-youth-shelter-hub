@@ -26,13 +26,15 @@ async function fetchFacilities() {
 fetchFacilities();
 
 function displayFacilities(facilities) {
-    markersGroup.clearLayers()
+  markersGroup.clearLayers();
 
-    facilities.forEach(facility => {
-        L.marker([facility.lat, facility.lng])
-        .bindPopup(`<b>${facility.name}</b><br>${facility.municipality}`)
-        .addTo(markersGroup)
+  facilities.forEach(facility => {
+    L.marker([facility.lat, facility.lng], {
+      icon: getCategoryIcon(facility.category)
     })
+      .bindPopup(`<b>${facility.name}</b><br>${facility.municipality}`)
+      .addTo(markersGroup);
+  });
 }
 
 document.getElementById('categoryFilter').addEventListener('change' , (e) => {
@@ -82,3 +84,22 @@ map.on('click' , (e) => {
     document.getElementById('lat').value = lat.toFixed(4)
     document.getElementById('lng').value = lng.toFixed(4);
 })
+
+function getCategoryIcon(category) {
+  let className = 'marker-default'
+
+  if (category === 'shelter') {
+    className = 'marker-shelter'
+
+  } else if (category === 'food_aid') {
+    className = 'marker-food_aid'
+  }
+
+  return L.divIcon({
+    className: '',
+    html: `<div class="custom-marker ${className}"></div>`,
+    iconSize: [28, 28],
+    iconAnchor: [14, 28], // Align tip of marker to coordinates
+    popupAnchor: [0, -28]  // Anchor popup box right above marker
+  })
+}
