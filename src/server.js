@@ -7,30 +7,48 @@ app.use(express.static('.'))
 
 const facilities = [
     {
-        id: 1 , 
-        name: "Centro de Acolhimento de Luanda" , 
-        category: "shelter" , 
-        municipality: "Luanda" , 
-        lat: -8.8383 , 
-        lng: 13.2344
-    },
-
+        id: 1,
+        name: "Hospital Pediátrico David Bernardino",
+        category: "food_aid",
+        municipality: "Luanda",
+        lat: -8.8251,
+        lng: 13.2372
+    } ,
+    
     {
-        id: 2 , 
-        name: "Apoio Alimentar Cazenga" , 
-        category: "food_aid" , 
-        municipality: "Cazenga", 
-        lat: -8.8150 , 
-        lng: 13.2900
+        id: 2,
+        name: "Lar Kuzola (Centro de Acolhimento)",
+        category: "shelter",
+        municipality: "Luanda",
+        lat: -8.8415,
+        lng: 13.2561
     },
 
     {
         id: 3 , 
-        name: 'aaa' , 
-        category: 'bbb' , 
-        municipality: 'ccc' , 
-        lat: 52.1 , 
-        lng: 52.2
+        name: "Centro de Acolhimento de Crianças do Cazenga" , 
+        category: "shelter" , 
+        municipality: "Cazenga" , 
+        lat: -8.8150,
+        lng: 13.2900
+    },
+
+    {
+        id: 4,
+        name: "Ponto de Apoio Alimentar de Viana",
+        category: "food_aid",
+        municipality: "Viana",
+        lat: -8.9133,
+        lng: 13.3719
+    },
+
+    {
+        id: 5,
+        name: "Centro Comunitário de Talatona",
+        category: "shelter",
+        municipality: "Talatona",
+        lat: -8.9200,
+        lng: 13.1833
     }
 ]
 
