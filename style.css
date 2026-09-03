@@ -168,3 +168,47 @@ h1 {
 .badge-food_aid {
   background-color: #27ae60;
 }
+
+/* Reset Leaflet divIcon box wrapper */
+.leaflet-marker-icon.custom-pin {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Base pin container */
+.pin-wrapper {
+  width: 36px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Pin teardrop shape */
+.pin {
+  width: 34px;
+  height: 34px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  position: relative;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+}
+
+.pin::after {
+  content: '';
+  width: 14px;
+  height: 10px;
+  margin: 10px 0 0 10px;
+  background: #ffffff;
+  position: absolute;
+  border-radius: 50%;
+}
+
+/* Category colors */
+.pin-shelter {
+  background: #3498db; /* Blue */
+}
+
+.pin-food {
+  background: #2ecc71; /* Green */
+}
