@@ -23,9 +23,11 @@ const initialFacilities = [
   { name: "Banco Alimentar de Luanda", municipality: "Cazenga", category: "food_aid", lat: -8.8250, lng: 13.2850 }
 ];
 
+const API_URL = 'https://luanda-youth-shelter-hub.onrender.com/api/facilities'
+
 async function fetchFacilities() {
   try {
-    const response = await fetch('/api/facilities');
+    const response = await fetch(API_URL);
     if (!response.ok) throw new Error('API Endpoint unavailable');
     
     const data = await response.json();
@@ -93,7 +95,7 @@ document.getElementById('facilityForm').addEventListener('submit', async (e) => 
   };
 
   try {
-    const response = await fetch('/api/facilities', {
+    const response = await fetch(API_URL , {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newFacility)
