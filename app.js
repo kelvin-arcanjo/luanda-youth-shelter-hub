@@ -29,10 +29,27 @@ function displayFacilities(facilities) {
   markersGroup.clearLayers();
 
   facilities.forEach(facility => {
+    // Generate Google Maps navigation URL using pin coordinates;
+    const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${facility.lat},${facility.lng}`;
+
+    const popupContent = `
+      <div style="font-family: sans-serif; padding: 2px;">
+        <h4 style="margin: 0 0 5px 0; color: #1a252f;">${facility.name}</h4>
+        <p style="margin: 0 0 8px 0; font-size: 13px; color: #555;">
+          <b>Município:</b> ${facility.municipality}<br>
+          <b>Categoria:</b> ${facility.category === 'shelter' ? 'Abrigo' : 'Apoio Alimentar'}
+        </p>
+        <a href="${directionsUrl}" target="_blank" rel="noopener noreferrer" 
+           style="display: inline-block; background-color: #3498db; color: white; padding: 5px 10px; border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: bold;">
+           🗺️ Como Chegar
+        </a>
+      </div>
+    `;
+
     L.marker([facility.lat, facility.lng], {
       icon: getCategoryIcon(facility.category)
     })
-      .bindPopup(`<b>${facility.name}</b><br>${facility.municipality}`)
+      .bindPopup(popupContent)
       .addTo(markersGroup);
   });
 }
@@ -69,11 +86,16 @@ document.getElementById('facilityForm').addEventListener('submit', async (e) => 
     });
 
     if (response.ok) {
-      const addedFacility = await response.json();
-      facilitiesData.push(addedFacility);
-      displayFacilities(facilitiesData);
+     // Refresh list to draw new color-coded marker live;
+      await fetchFacilities();
+
+      // Reset form fields;
       e.target.reset();
+
+      // Optional feedback alert;
+      alert('Instalação adicionada com sucesso!')
     }
+
   } catch (error) {
     console.error('Error adding facility:', error);
   }

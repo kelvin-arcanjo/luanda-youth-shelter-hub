@@ -49,8 +49,35 @@ const facilities = [
         municipality: "Talatona",
         lat: -8.9200,
         lng: 13.1833
-    }
-]
+    },
+
+    {
+    id: 6,
+    name: "Centro de Apoio Social de Cacuaco",
+    category: "food_aid",
+    municipality: "Cacuaco",
+    lat: -8.7800,
+    lng: 13.3667
+  },
+
+  {
+    id: 7,
+    name: "Centro de Reabilitação do Samba",
+    category: "shelter",
+    municipality: "Samba",
+    lat: -8.8580,
+    lng: 13.2120
+  },
+
+  {
+    id: 8,
+    name: "Refeitório Social de Belas / Kilamba",
+    category: "food_aid",
+    municipality: "Belas",
+    lat: -8.9950,
+    lng: 13.2500
+  }
+];
 
 app.get('/api/facilities' , (req , res) => {
     res.json(facilities)
